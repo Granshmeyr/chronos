@@ -1,8 +1,8 @@
 #!/bin/bash
-# This script is a companion to /etc/init/remount.conf, which remounts every mount point with exec
+# This script is a companion to /etc/init/remount.conf; removes mount flags post login
 
 MOUNTS=$( cat /etc/mtab | cut -d ' ' -f2 )
 for line in $MOUNTS
 do
-        sudo mount -o remount,rw,exec,symfollow "$line"
+        sudo mount -o remount,rw,exec,suid,dev,symfollow "$line"
 done
