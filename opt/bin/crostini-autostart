@@ -1,7 +1,7 @@
 #!/bin/bash
 # This script starts the virtual machine and loops to check that it has finished loading.
 # This is necessary because trying to start a container before the virtual machine has loaded seems to break things.
-# You must replace CROS_USER_ID_HASH with your specific hash. Run 'printenv' as chronus to see what yours is.
+# You must replace CROS_USER_ID_HASH with your specific hash. Run 'printenv' as chronos to see what yours is.
 
 CROS_USER_ID_HASH=dd569e257564a3efc2be934b597401b88a9c453f
 
