@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script is a companion to /etc/init/remount.conf; removes mount flags post login
+# This script remounts all mount points w/o noexec, nosuid, and nodev.
 
 MOUNTS=$( cat /etc/mtab | cut -d ' ' -f2 )
 for line in $MOUNTS
