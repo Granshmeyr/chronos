@@ -1,0 +1,19 @@
+#!/bin/bash
+# This script starts the virtual machine and loops to check that it has finished loading.
+# This is necessary because trying to start a container before the virtual machine has loaded seems to break things.
+
+CROS_USER_ID_HASH=dd569e257564a3efc2be934b597401b88a9c453f
+
+machine_started() {
+        vsh --vm_name=termina --owner_id="${CROS_USER_ID_HASH}" -- LXD_DIR=/mnt/stateful/lxd LXD_CONF=/mnt/stateful/lxd_conf lxc list 2>&1 | grep -qe 'penguin | STOPPED'
+}
+
+vmc start termina &
+
+machine_started; STATUS=$?
+while [[ $STATUS -eq 1 ]]; do
+        machine_started; STATUS=$?
+        sleep 1
+done
+
+vmc container termina penguin
