@@ -7,6 +7,6 @@ https://github.com/cparker15/connection-forwarder/tree/patch-1
 
 Assuming your server is configured correctly, simply create a new rule in Connection Forwarder to expose the port:
 
-> TCP 192.168.50.202:8080 (mlan0) → 100.115.92.195:8080
+> TCP 192.168.50.202:8080 (mlan0) → 100.115.92.195:8080 (Custom)
 
 So, when I navigate to 192.168.50.202:8080 on my phone, it will connect to my server in Crostini which is bound to 100.115.92.195 of the eth0 device (visible with `ip a`). For a real example, I installed qbittorrent-nox and simply set the IP and Port in the Web UI settings. The ports you choose don't have to match and don't matter, but some might be reserved so just try anything.
