@@ -1,12 +1,14 @@
 #!/bin/bash
 # This script starts the virtual machine and loops to check that it has finished loading.
-# This is necessary because trying to start a container before the virtual machine has loaded seems to break things.
-# You must replace CROS_USER_ID_HASH with your specific hash. Run 'printenv' as chronos to see what yours is.
+# Something in the "vshd" breaks if you try to preemptively establish a connection.
+# 
+# Replace CROS_USER_ID_HASH= with your own hash, displayed when typing 'printenv' in the chronos shell.
 
 CROS_USER_ID_HASH=dd569e257564a3efc2be934b597401b88a9c453f
 
 machine_started() {
-        vsh --vm_name=termina --owner_id="${CROS_USER_ID_HASH}" -- LXD_DIR=/mnt/stateful/lxd LXD_CONF=/mnt/stateful/lxd_conf lxc list 2>&1 | grep -qe 'penguin | STOPPED'
+        vsh --vm_name=termina --owner_id="${CROS_USER_ID_HASH}" -- LXD_DIR=/mnt/stateful/lxd LXD_CONF=/mnt/stateful/lxd_conf lxc list 2>&1 | \
+        grep -qe 'penguin | STOPPED'
 }
 
 vmc start termina &
@@ -17,4 +19,5 @@ while [[ $STATUS -eq 1 ]]; do
         sleep 1
 done
 
+sleep 1
 vmc container termina penguin
