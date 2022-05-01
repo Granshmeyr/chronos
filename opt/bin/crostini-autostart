@@ -1,6 +1,6 @@
 #!/bin/bash
 # This script starts the virtual machine and loops to check that it has finished loading.
-# Something in the "vshd" breaks if you try to preemptively establish a connection.
+# Something in the "vshd" breaks if you try to preemptively connect to a container.
 # 
 # Replace CROS_USER_ID_HASH= with your own hash, displayed when typing 'printenv' in the chronos shell.
 
